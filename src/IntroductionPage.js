@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './App.css';
-import Navbar from './Navbar';
 
-// 从 src/images 文件夹中导入本地图片
+
 import image1 from './images/1.png';
 import image2 from './images/2.png';
 import image3 from './images/3.png';
@@ -28,13 +27,11 @@ const IntroductionPage = () => {
   // 定义当前图片索引的 state
   const [currentImage, setCurrentImage] = useState(0);
 
-  // 在 useEffect 中使用 setInterval 每 0.8 秒更新一次图片索引
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImage(prevIndex => (prevIndex + 1) % images.length);
     }, 800); // 0.8s
 
-    // 组件卸载时清除定时器
     return () => clearInterval(intervalId);
   }, [images.length]);
 

@@ -16,15 +16,12 @@ import image8 from './images/8.png';
 const IntroductionPage = () => {
   const navigate = useNavigate();
 
-  // 点击 "Start" 按钮时，跳转到 /quiz 路由
   const handleStartQuiz = () => {
     navigate('/quiz');
   };
 
-  // 准备一个图片数组
   const images = [image1, image2, image3, image4, image5, image6, image7, image8];
 
-  // 定义当前图片索引的 state
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {

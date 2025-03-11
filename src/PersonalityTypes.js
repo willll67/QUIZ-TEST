@@ -12,7 +12,6 @@ import cheetahImg from './images/Cheetah.png';
 import goldenRetrieverImg from './images/GoldenRetriever.png';
 import capybaraImg from './images/Capybara.png';
 
-// 定义各个动物的详细数据
 const animalData = {
   squirrel: {
     name: 'Squirrel',
@@ -168,8 +167,7 @@ const IntroductionPage = () => {
             </section>
           </div>
         </div>
-
-        {/* 右侧图标区域 */}
+        
         <div className="icons-container">
           {animalKeys.map((key) => (
             <div

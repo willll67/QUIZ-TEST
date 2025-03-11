@@ -12,7 +12,6 @@ import cheetahImg from './images/Cheetah.png';
 import goldenRetrieverImg from './images/GoldenRetriever.png';
 import capybaraImg from './images/Capybara.png';
 
-// 为每个动物映射对应的图片
 const animalImages = {
   Squirrel: squirrelImg,
   Penguin: penguinImg,
@@ -28,26 +27,19 @@ const allImagesArray = Object.values(animalImages);
 const QuizPage = () => {
   const navigate = useNavigate();
 
-  // 当前题目索引
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  // 每题选项记录：answers[questionId] = [optionIndex1, optionIndex2]
   const [answers, setAnswers] = useState({});
-  // 最终结果信息
   const [result, setResult] = useState(null);
-  // 阶段： 'quiz' | 'loading' | 'result'
   const [stage, setStage] = useState('quiz');
 
-  // “You are a...” 加载画面相关
-  const [ellipsisCount, setEllipsisCount] = useState(0); // 用于省略号动画
-  const [imageOpacity, setImageOpacity] = useState(0);   // 用于图片淡入
+  // “You are a...”
+  const [ellipsisCount, setEllipsisCount] = useState(0);
+  const [imageOpacity, setImageOpacity] = useState(0);
 
-  // 用于加载阶段的闪烁效果图片
   const [randomLoadingImg, setRandomLoadingImg] = useState(allImagesArray[0]);
 
-  // 存储最终计算出的动物名称（用于结果页匹配图片）
   const [finalAnimal, setFinalAnimal] = useState(null);
 
-  // 点击选项
   const handleOptionClick = (questionId, optionIndex) => {
     const selectedOptions = answers[questionId] || [];
     if (selectedOptions.includes(optionIndex)) {
@@ -62,7 +54,6 @@ const QuizPage = () => {
     }
   };
 
-  // 下一题时必须先选一个选项
   const goToNextQuestion = () => {
     const currentQuestion = questions[currentQuestionIndex];
     if (!answers[currentQuestion.id] || answers[currentQuestion.id].length === 0) {
@@ -74,16 +65,13 @@ const QuizPage = () => {
     }
   };
 
-  // 上一题
   const goToPreviousQuestion = () => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
   };
 
-  // 提交测验
   const handleSubmit = () => {
-    // 检查所有题目至少选1个
     for (let i = 0; i < questions.length; i++) {
       const q = questions[i];
       const selected = answers[q.id] || [];
@@ -93,7 +81,6 @@ const QuizPage = () => {
       }
     }
 
-    // 计算分数
     const scores = {
       Squirrel: 0,
       Penguin: 0,
@@ -115,7 +102,6 @@ const QuizPage = () => {
       });
     });
 
-    // 找到最高分（并列则取最先出现的）
     let computedFinalAnimal = null;
     let highestScore = -Infinity;
     for (const animal of Object.keys(scores)) {
@@ -126,20 +112,17 @@ const QuizPage = () => {
     }
     setFinalAnimal(computedFinalAnimal);
     setResult(quizResultDescriptions[computedFinalAnimal]);
-    // 提交后直接进入加载阶段（去除倒计时遮挡）
     setStage('loading');
     setEllipsisCount(0);
     setImageOpacity(0);
   };
 
-  // “You are a...” 加载阶段：3秒动画，图片闪烁效果
   useEffect(() => {
     if (stage === 'loading') {
       const ellipsisTimer = setInterval(() => {
         setEllipsisCount((c) => (c < 3 ? c + 1 : 0));
       }, 500);
 
-      // 闪烁图片：每200ms随机切换一次图片
       const flashingTimer = setInterval(() => {
         const randomIndex = Math.floor(Math.random() * allImagesArray.length);
         setRandomLoadingImg(allImagesArray[randomIndex]);
@@ -164,7 +147,6 @@ const QuizPage = () => {
     }
   }, [stage]);
 
-  // 重做测验
   const handleRetake = () => {
     setAnswers({});
     setResult(null);
@@ -172,7 +154,6 @@ const QuizPage = () => {
     setCurrentQuestionIndex(0);
   };
 
-  // 去金融人格详情
   const handleLearnMore = () => {
     navigate('/personality');
   };
@@ -191,7 +172,6 @@ const QuizPage = () => {
     return 'option-box option-box-1';
   };
 
-  // 结果页使用 finalAnimal 来获取正确的图片（若未匹配到则使用企鹅）
   const finalAnimalImg = animalImages[finalAnimal] || penguinImg;
 
   if (stage === 'loading') {
@@ -296,71 +276,73 @@ const QuizPage = () => {
     );
   }
 
-  // 测验阶段
+  // test
   return (
-    <div className="quiz-page-container" style={{ minHeight: 850 + shiftDown }}>
-      <div className="question-number-container">
-        <div className="circle-background"></div>
-        <div className="circle-border"></div>
-        <div className="question-number-text">#{currentQuestionIndex + 1}</div>
-      </div>
-      <div className="question-text">{question.question}</div>
-      {question.options.map((opt, idx) => {
-        const classes = getOptionClass(idx);
-        const selectedClass = isSelected(idx) ? ' selected-option' : '';
-        return (
-          <div
-            key={idx}
-            className={classes + selectedClass}
-            onClick={() => handleOptionClick(question.id, idx)}
-          >
-            <div className="option-bg"></div>
-            <div className="option-text" dangerouslySetInnerHTML={{ __html: opt.option }} />
+    <div className="quiz-wrapper">
+      <div className="quiz-page-container" style={{ minHeight: 850 + shiftDown }}>
+        <div className="question-number-container">
+          <div className="circle-background"></div>
+          <div className="circle-border"></div>
+          <div className="question-number-text">#{currentQuestionIndex + 1}</div>
+        </div>
+        <div className="question-text">{question.question}</div>
+        {question.options.map((opt, idx) => {
+          const classes = getOptionClass(idx);
+          const selectedClass = isSelected(idx) ? ' selected-option' : '';
+          return (
+            <div
+              key={idx}
+              className={classes + selectedClass}
+              onClick={() => handleOptionClick(question.id, idx)}
+            >
+              <div className="option-bg"></div>
+              <div className="option-text" dangerouslySetInnerHTML={{ __html: opt.option }} />
+            </div>
+          );
+        })}
+        {currentQuestionIndex > 0 && (
+          <div className="back-button" style={{ top: 536 + shiftDown }} onClick={goToPreviousQuestion}>
+            <div className="back-bg"></div>
+            <div className="back-text">Back</div>
           </div>
-        );
-      })}
-      {currentQuestionIndex > 0 && (
-        <div className="back-button" style={{ top: 536 + shiftDown }} onClick={goToPreviousQuestion}>
-          <div className="back-bg"></div>
-          <div className="back-text">Back</div>
-        </div>
-      )}
-      {currentQuestionIndex < totalQuestions - 1 ? (
-        <div className="next-button" style={{ top: 537 + shiftDown }} onClick={goToNextQuestion}>
-          <div className="next-bg"></div>
-          <div className="next-text">Next</div>
-        </div>
-      ) : (
-        <div className="next-button" style={{ top: 537 + shiftDown }} onClick={handleSubmit}>
-          <div className="next-bg"></div>
-          <div className="next-text">Submit</div>
-        </div>
-      )}
-      <div className="progress-line" style={{ top: 689.5 + shiftDown }}>
-        <svg width="970" height="11" viewBox="0 0 970 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0.5 5.5H969.5" stroke="black" strokeWidth="10" />
-        </svg>
-      </div>
-      {Array.from({ length: totalQuestions }).map((_, idx) => {
-        const circleClass = `progress-circle circle-${idx + 1}`;
-        const isActive = idx === currentQuestionIndex;
-        return (
-          <div key={idx} className={circleClass} style={{ top: 652 + shiftDown }}>
-            {isActive ? (
-              <>
-                <div className="progress-inner-black"></div>
-                <div className="progress-inner-yellow"></div>
-                <div className="progress-circle-text">{idx + 1}</div>
-              </>
-            ) : (
-              <>
-                <div className="progress-inner-blue"></div>
-                <div className="progress-circle-text">{idx + 1}</div>
-              </>
-            )}
+        )}
+        {currentQuestionIndex < totalQuestions - 1 ? (
+          <div className="next-button" style={{ top: 537 + shiftDown }} onClick={goToNextQuestion}>
+            <div className="next-bg"></div>
+            <div className="next-text">Next</div>
           </div>
-        );
-      })}
+        ) : (
+          <div className="next-button" style={{ top: 537 + shiftDown }} onClick={handleSubmit}>
+            <div className="next-bg"></div>
+            <div className="next-text">Submit</div>
+          </div>
+        )}
+        <div className="progress-line" style={{ top: 689.5 + shiftDown }}>
+          <svg width="970" height="11" viewBox="0 0 970 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 5.5H969.5" stroke="black" strokeWidth="10" />
+          </svg>
+        </div>
+        {Array.from({ length: totalQuestions }).map((_, idx) => {
+          const circleClass = `progress-circle circle-${idx + 1}`;
+          const isActive = idx === currentQuestionIndex;
+          return (
+            <div key={idx} className={circleClass} style={{ top: 652 + shiftDown }}>
+              {isActive ? (
+                <>
+                  <div className="progress-inner-black"></div>
+                  <div className="progress-inner-yellow"></div>
+                  <div className="progress-circle-text">{idx + 1}</div>
+                </>
+              ) : (
+                <>
+                  <div className="progress-inner-blue"></div>
+                  <div className="progress-circle-text">{idx + 1}</div>
+                </>
+              )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

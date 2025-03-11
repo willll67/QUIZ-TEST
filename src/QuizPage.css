@@ -1,5 +1,3 @@
-/* 外层容器，大小 & 背景色 */
-
 .quiz-page-container {
     width: 1080px;
     height: 832px;
@@ -50,7 +48,7 @@
     margin-top: 20px;
   }
   
-  /* 题号圆形 */
+
   .question-number-container {
     width: 98px;
     height: 100px;
@@ -59,7 +57,6 @@
     position: absolute;
   }
   
-  /* 后面的黑色圆 */
   .circle-background {
     width: 62px;
     height: 62px;
@@ -70,7 +67,7 @@
     border-radius: 9999px;
   }
   
-  /* 前面的黄色圆（带黑色边框） */
+
   .circle-border {
     width: 62px;
     height: 62px;
@@ -82,7 +79,6 @@
     border: 10px black solid;
   }
   
-  /* 问题号文字 #1 */
   .question-number-text {
     width: 65px;
     height: 68px;
@@ -97,7 +93,6 @@
     word-wrap: break-word;
   }
   
-  /* 问题文本 */
   .question-text {
     width: 998px;
     height: 99px;
@@ -111,15 +106,13 @@
     word-wrap: break-word;
   }
   
-  /* 选项卡统一样式 */
   .option-box {
     width: 496px;
     height: 95;
     position: absolute;
-    cursor: pointer; /* 鼠标指针 */
+    cursor: pointer; 
   }
   
-  /* 白色背景 + 黑色边框 */
   .option-bg {
     width: 496px;
     height: 95px;
@@ -131,7 +124,6 @@
     border: 10px black solid;
   }
   
-  /* 选项文字 */
   .option-text {
     width: 418px;
     height: 52.52px;
@@ -146,7 +138,6 @@
     word-wrap: break-word;
   }
   
-  /* 4 个选项的位置：2×2 布局 */
   .option-box-1 {
     left: 120px;
     top: 256px;
@@ -167,18 +158,16 @@
     top: 387px;
   }
   
-  /* 若有第 5 个选项，则放第三行左侧 */
   .option-box-5 {
     left: 120px;
-    top: 518px; /* 自行调整行间距 */
+    top: 518px;
   }
   
-  /* 选中后高亮（示例：红色边框） */
   .selected-option .option-bg {
-    background: #FED702; /* 黄色背景 */
+    background: #FED702;
   }
   
-  /* “Next” 按钮 */
+  /* “Next” */
   .next-button {
     width: 231px;
     height: 69.75px;
@@ -194,7 +183,7 @@
     left: 0px;
     top: 0px;
     position: absolute;
-    background: #81ECFF; /* 浅青色 */
+    background: #81ECFF;
     border-radius: 34.88px;
     border: 10px black solid;
   }
@@ -213,7 +202,6 @@
     word-wrap: break-word;
   }
   
-  /* “Back” 按钮 */
   .back-button {
     width: 231px;
     height: 69.75px;
@@ -229,7 +217,7 @@
     left: 0px;
     top: 0px;
     position: absolute;
-    background: #E681FF; /* 粉紫色 */
+    background: #E681FF;
     border-radius: 34.88px;
     border: 7.5px black solid;
   }
@@ -249,7 +237,6 @@
   }
   
   
-  /* 进度条：一条黑色横线 */
   .progress-line {
     position: absolute;
     left: 156.5px;
@@ -263,8 +250,7 @@
     margin-left: 10px;
     position: absolute;
   }
-  
-  /* 当前题圆（circle-1）有两层：黑色在下 + 黄色带黑边在上 */
+
   .progress-inner-black {
     width: 60.76px;
     height: 60.76px;
@@ -286,7 +272,7 @@
     border: 10px black solid;
   }
   
-  /* 其他题圆（circle-2 ~ circle-7）只有一层：蓝底+黑边 */
+
   .progress-inner-blue {
     width: 60.76px;
     height: 60.76px;
@@ -298,7 +284,6 @@
     border: 10px black solid;
   }
   
-  /* 圆内文字 */
   .progress-circle-text {
     width: 50.7px;
     height: 53.04px;
@@ -313,7 +298,6 @@
     word-wrap: break-word;
   }
   
-  /* 进度圆的位置：从 circle-1 到 circle-7 */
   .circle-1 {
     left: 120px;
     top: 652px;
@@ -349,7 +333,6 @@
     top: 652px;
   }
   
-  /* 新增结果页按钮样式：和 Back 按钮一样的 */
 .result-button-back {
     width: 300px;
     height: 69.75px;
@@ -366,7 +349,6 @@
     justify-content: center;
   }
   
-  /* 新增结果页按钮样式：和 Next 按钮一样的 */
   .result-button-next {
     width: 300px;
     height: 69.75px;
@@ -382,4 +364,16 @@
     align-items: center;
     justify-content: center;
   }
-  
+
+.quiz-wrapper {
+  width: 1080px;  
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .quiz-wrapper {
+    transform: scale(0.35);
+    transform-origin: top left;
+    margin-top: 250px; 
+  }
+}

@@ -2,7 +2,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: #0057FF; /* 蓝色背景 */
+  background: #0057FF;
   color: white;
   font-family: 'rl-aqva', sans-serif;
   font-style: normal;
@@ -114,7 +114,6 @@ html, body {
   border: 10px solid black;
 }
 
-/* 修改后的按钮文字：使用 transform 居中 */
 .start-button-text {
   position: absolute;
   top: 60%;
@@ -143,7 +142,7 @@ html, body {
   height: 56px;
 }
 
-/* 导航栏（其他页面共用） */
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -174,23 +173,14 @@ html, body {
 }
 
 .nav-link {
-  text-decoration: none; /* 默认不显示下划线 */
+  text-decoration: none; 
 }
 
 .nav-link:hover {
-  text-decoration: underline; /* 鼠标悬停时显示下划线 */
+  text-decoration: underline; 
 }
 
 
-/* ========================= */
-/* Quiz Page 样式             */
-/* （采用后面出现的格式为主） */
-/* ========================= */
-
-
-/* ========================= */
-/* Personality Page 样式      */
-/* ========================= */
 .icon {
   position: absolute;
   width: 108px;
@@ -354,14 +344,11 @@ html, body {
 }
 
 
-/* 主内容区域：详情 + 图标 */
 .content-area {
   display: flex;
-  /* 如有需要可以加上响应式 margin/padding */
   position: relative;
 }
 
-/* 详情区域 */
 .detail-container {
   width: 489px;
   height: fit-content;
@@ -369,7 +356,6 @@ html, body {
   border: 10px solid black;
   border-radius: 30px;
   padding: 20px;
-  /* 允许内部内容撑开高度 */
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -462,4 +448,119 @@ html, body {
   height: 57px;
   top: 25px;
   left: 26px;
+}
+
+/* ===== Navbar  ===== */
+.navbar-container {
+  position: absolute;
+  width: 1280px;
+  top: 0;
+  left: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100px;
+}
+
+
+.desktop-menu {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-size: 30px;
+  font-family: 'rl-aqva', sans-serif;
+  font-weight: 900;
+}
+
+
+.mobile-menu-icon {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.mobile-menu-icon .bar {
+  height: 3px;
+  width: 100%;
+  background-color: white;
+}
+
+.mobile-dropdown {
+  display: flex;
+  flex-direction: column;
+  background-color: #0057FF;
+  padding: 5px 20px;
+  width: 80%;
+  position: absolute;
+  top: 70px;
+  left: 45%;
+  font-size: small;
+  transform: translateX(-50%);
+}
+
+
+@media screen and (max-width: 768px) {
+  .navbar-container {
+    width: 100%;
+    left: 0;
+  }
+  .navbar-content {
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  .desktop-menu {
+    display: none;
+  }
+  .mobile-menu-icon {
+    display: flex;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .intro-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-24%, -30%) scale(0.5);
+    transform-origin: top left;
+  }
+}
+
+
+.about-container {
+  width: 80%;
+  max-width: 800px;
+  margin: 200px 300px;
+  padding: 2rem;
+  font-family: 'rl-aqva', sans-serif;
+  color: #252525;
+  background: #CFF1FF;
+  border: 10px solid black;
+  border-radius: 30px;
+}
+
+.about-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.about-container p {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 1rem;
 }
